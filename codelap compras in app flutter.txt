@@ -7,6 +7,3 @@ https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-4
 https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#6
 https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#7
 https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#8
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#9
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#10
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#11
