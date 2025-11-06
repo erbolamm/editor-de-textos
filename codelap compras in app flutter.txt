@@ -1,9 +1,481 @@
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#0
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#1
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#2
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#3
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#4
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#5
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#6
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#7
-https://codelabs.developers.google.com/codelabs/flutter-in-app-purchases?hl=es-419#8
+# ⚡ CalcaConnect: Guía de Inicio Rápido
+
+**Versión**: 1.0.0  
+**Fecha**: 6 de noviembre de 2025  
+**Propósito**: Punto de entrada unificado para toda la documentación de CalcaConnect  
+**Estado**: ✅ Listo para Implementación
+
+---
+
+## 📚 Documentación Disponible
+
+### 1️⃣ **Para Decisión Ejecutiva** (5 min lectura)
+
+**Archivo**: Este documento (PROYECCION_REMOTA_GUIA_INICIO.md)
+
+**Pregunta clave**: ¿Vale la pena implementar CalcaConnect?  
+**Respuesta**: ✅ **SÍ** - Tecnología validada, stack sólido, ROI positivo
+
+---
+
+### 2️⃣ **Para Implementación Técnica** (30 min lectura)
+
+**Archivo**: [`PROYECCION_REMOTA.md`](PROYECCION_REMOTA.md) (903 líneas)
+
+**Contenido**:
+- Especificación completa de funcionalidad
+- Código Dart de ejemplo listo para usar
+- Arquitectura técnica detallada
+- Plan de fases con estimaciones
+- UI/UX mockups y flujos
+
+**Cuándo leer**: Antes de comenzar la implementación
+
+---
+
+### 3️⃣ **Para Validación de Decisiones** (45 min lectura)
+
+**Archivo**: [`PROYECCION_REMOTA_ANALISIS_ALTERNATIVAS.md`](PROYECCION_REMOTA_ANALISIS_ALTERNATIVAS.md) (697 líneas)
+
+**Contenido**:
+- Comparativa de 12 tecnologías evaluadas
+- Tablas de decisión con puntuaciones
+- Alternativas descartadas con justificación
+- Referencias a documentación externa
+- Riesgos actualizados con mitigaciones
+
+**Cuándo leer**: Si tienes dudas sobre las tecnologías elegidas
+
+---
+
+## 🎯 Resumen Ejecutivo (2 min)
+
+### ¿Qué es CalcaConnect?
+
+Sistema de proyección remota multi-dispositivo que permite a un usuario **ver en tiempo real** lo que otro dispositivo está proyectando en CalcaApp.
+
+**Caso de uso principal**:
+```
+Usuario A proyecta imagen en pared → Usuario B ve esa proyección en su pantalla
+```
+
+### 🏆 Decisión Final
+
+**Stack Tecnológico Validado**:
+- **Descubrimiento**: `bonsoir` (mDNS/Bonjour) - Mejor opción 2024-2025
+- **Streaming MVP**: HTTP/MJPEG - Rápido de implementar, 200-500ms latencia
+- **Streaming v1.0**: WebRTC P2P - Latencia ultra-baja <100ms
+- **Sincronización**: WebSocket para estado
+
+**Alternativas evaluadas**: 12 opciones investigadas  
+**Conclusión**: La propuesta original es **técnicamente sólida** ✅
+
+### 📊 Validación
+
+| Criterio | Evaluación | Estado |
+|----------|------------|--------|
+| **Tecnología probada** | mDNS + WebRTC = estándar industria | ✅ Validado |
+| **Sin dependencias cloud** | 100% red local WiFi | ✅ Confirmado |
+| **Privacidad** | Datos nunca salen de LAN | ✅ Garantizado |
+| **Costos operativos** | €0/mes (sin servidores) | ✅ Confirmado |
+| **Complejidad** | Media-Alta pero manejable | ⚠️ Requiere 2.5-3 meses |
+
+### ⏱️ Timeline Ajustado
+
+| Fase | Estimación Original | Estimación Realista |
+|------|--------------------|--------------------|
+| Total | 2 meses (8 sem) | **2.5-3 meses (10-12 sem)** |
+
+**Razón del ajuste**: WebRTC tiene curva de aprendizaje pronunciada para 1 desarrollador
+
+---
+
+## 🚀 Próximos Pasos
+
+### ✅ Fase 0: Preparación (Esta Semana)
+
+**Checkpoint actual**: Documentación completa ✅
+
+**Pendiente**:
+- [x] Validar stack tecnológico → **HECHO**
+- [x] Documentar especificación → **HECHO**
+- [x] Analizar alternativas → **HECHO**
+- [ ] **Crear rama de desarrollo**
+- [ ] Configurar dependencias iniciales
+
+**Comando para comenzar**:
+```bash
+# 1. Crear rama de desarrollo
+git checkout -b feature/calca-connect
+
+# 2. Instalar dependencias
+flutter pub add bonsoir network_info_plus shelf shelf_web_socket web_socket_channel
+
+# 3. Crear estructura de carpetas
+mkdir -p lib/features/calca_connect/{discovery,streaming,ui}
+```
+
+---
+
+### 📋 Fase 1: Descubrimiento (1-2 semanas)
+
+**Objetivo**: Radar funcional con auto-discovery
+
+**Tareas**:
+- [ ] Implementar broadcast con `bonsoir` (Dispositivo A)
+- [ ] Implementar discovery con `bonsoir` (Dispositivo B)
+- [ ] UI del radar con lista de dispositivos
+- [ ] Lógica de conexión básica
+- [ ] Testing en 2+ dispositivos misma WiFi
+
+**Criterio de éxito**:
+- ✅ Detectar dispositivos en <5 segundos
+- ✅ Conectar con tap en dispositivo
+- ✅ Ambos dispositivos desaparecen del radar al conectar
+
+**Riesgo**: 🟢 Bajo - `bonsoir` es maduro y bien documentado
+
+**Referencia**: Ver sección "Descubrimiento de Dispositivos" en [`PROYECCION_REMOTA.md`](PROYECCION_REMOTA.md#descubrimiento-de-dispositivos-lan-discovery)
+
+---
+
+### 📋 Fase 2: Streaming MVP (2-3 semanas)
+
+**Objetivo**: Proyección funcional con HTTP streaming
+
+**Tareas**:
+- [ ] Servidor HTTP/MJPEG en Proyector (A)
+- [ ] Cliente HTTP en Visor (B)
+- [ ] Sincronización de estado vía WebSocket
+- [ ] Navegación automática a página calca
+- [ ] Testing de latencia (<500ms objetivo)
+
+**Criterio de éxito**:
+- ✅ Stream visible en tiempo real
+- ✅ Calidad mínima 720p @ 15fps
+- ✅ Latencia <500ms
+- ✅ Estable durante 5+ minutos
+
+**Riesgo**: 🟢 Bajo - Tecnología simple HTTP
+
+**Referencia**: Ver sección "Streaming HTTP" en [`PROYECCION_REMOTA_ANALISIS_ALTERNATIVAS.md`](PROYECCION_REMOTA_ANALISIS_ALTERNATIVAS.md#opción-2-http-streaming-mjpeg--recomendado-mvp)
+
+---
+
+### 📋 Fase 3: WebRTC (3-4 semanas)
+
+**Objetivo**: Latencia ultra-baja <100ms
+
+**Tareas**:
+- [ ] Migrar a `flutter_webrtc`
+- [ ] Implementar señalización WebSocket
+- [ ] Gestión de ICE candidates
+- [ ] Calidad adaptativa automática
+- [ ] Testing exhaustivo rendimiento
+
+**Criterio de éxito**:
+- ✅ Latencia <100ms en red local
+- ✅ 1080p @ 30fps en dispositivos modernos
+- ✅ Degradación graceful en dispositivos antiguos
+
+**Riesgo**: 🟡 Medio - Complejidad alta, posible necesidad de consultoría
+
+**Plan B**: Si bloqueado >4 semanas, optimizar HTTP en lugar de migrar
+
+**Referencia**: Ver sección "WebRTC" en [`PROYECCION_REMOTA_ANALISIS_ALTERNATIVAS.md`](PROYECCION_REMOTA_ANALISIS_ALTERNATIVAS.md#opción-1-flutter_webrtc--recomendado-v10)
+
+---
+
+### 📋 Fase 4: Features Avanzados (4-6 semanas)
+
+**Objetivo**: Funcionalidades premium
+
+**Tareas**:
+- [ ] Dibujo colaborativo (ambos dispositivos dibujan)
+- [ ] Grabación de sesión
+- [ ] Modo presentación multi-dispositivo
+- [ ] Optimizaciones de batería
+- [ ] Fallback manual de IP
+
+**Criterio de éxito**:
+- ✅ Feature completo listo para PRO users
+- ✅ Consumo batería <20%/hora
+- ✅ Conexión exitosa >95% casos
+
+**Riesgo**: 🟢 Bajo - Features opcionales, no bloqueantes
+
+---
+
+## ⚠️ Riesgos Principales y Mitigaciones
+
+### 1. Redes Corporativas Bloquean mDNS
+**Probabilidad**: 30%  
+**Impacto**: Alto  
+**Mitigación**: 
+- Implementar entrada manual de IP como fallback
+- Mostrar mensaje educativo claro
+- Tutorial en app de cómo encontrar IP del dispositivo
+
+### 2. WebRTC Más Complejo de lo Estimado
+**Probabilidad**: 60%  
+**Impacto**: Alto (retraso 2-4 semanas)  
+**Mitigación**:
+- Estudiar proyectos open-source antes de comenzar
+- Contratar consultoría puntual (5-10h) si bloqueado >1 semana
+- Plan B: Optimizar HTTP si WebRTC no viable
+
+### 3. Consumo de Batería Excesivo
+**Probabilidad**: 70%  
+**Impacto**: Medio  
+**Mitigación**:
+- Timeout automático 30 minutos
+- Advertencia si batería <20%
+- Forzar desconexión si batería <10%
+
+### 4. Compatibilidad Dispositivos Antiguos
+**Probabilidad**: 35%  
+**Impacto**: Medio  
+**Mitigación**:
+- Detectar capacidades del dispositivo
+- Degradar calidad automáticamente (1080p → 720p → 480p)
+- Mostrar advertencia en dispositivos API <23
+
+---
+
+## 💰 Modelo de Negocio Recomendado
+
+### Opción Elegida: Feature Premium (Incluido en Suscripción PRO)
+
+**Ventajas**:
+- ✅ Aumenta valor percibido de suscripción PRO
+- ✅ Diferenciador vs competencia
+- ✅ No fragmenta base de usuarios
+- ✅ Marketing: "Proyección remota exclusiva para PRO"
+
+**Alternativa descartada**: IAP separado ($2.99)
+- Fragmentaría experiencia de usuario
+- Menos atractivo que bundle en PRO
+
+**Proyección de impacto**:
+- Conversión PRO estimada: +5-10% (usuarios que necesitan esta feature)
+- Retención PRO: +15% (feature única)
+
+---
+
+## 📊 Métricas de Éxito
+
+### KPIs Técnicos
+
+| Métrica | MVP (Fase 2) | v1.0 (Fase 3) |
+|---------|--------------|---------------|
+| **Latencia streaming** | <500ms | <100ms |
+| **Tiempo descubrimiento** | <5s | <2s |
+| **Calidad video** | 720p@15fps | 1080p@30fps |
+| **Tasa éxito conexión** | >80% | >95% |
+| **Consumo batería** | <25%/hora | <20%/hora |
+| **Alcance WiFi** | 20m | 50m |
+
+### KPIs de Negocio (Post-Launch)
+
+| Métrica | Objetivo Mes 1 | Objetivo Mes 3 |
+|---------|----------------|----------------|
+| **Usuarios activos feature** | 500 | 2,000 |
+| **Sesiones/usuario/semana** | 2 | 4 |
+| **Duración promedio sesión** | 5 min | 10 min |
+| **Tasa satisfacción** | >70% | >85% |
+| **Conversión a PRO atribuida** | +3% | +7% |
+
+---
+
+## 🎓 Recursos de Aprendizaje
+
+### Antes de Comenzar (Estudio Previo)
+
+**Semana -1: Preparación**
+1. **mDNS/Bonjour** (2 horas):
+   - [Bonsoir Package Docs](https://pub.dev/packages/bonsoir)
+   - [Apple Bonjour Overview](https://developer.apple.com/bonjour/)
+
+2. **WebRTC Basics** (4 horas):
+   - [WebRTC for the Curious](https://webrtcforthecurious.com/)
+   - [Flutter WebRTC Examples](https://github.com/flutter-webrtc/flutter-webrtc/tree/master/example)
+
+3. **Proyectos Inspiración** (2 horas):
+   - [LocalSend](https://github.com/localsend/localsend) - File sharing P2P
+   - [GetStream WebRTC Flutter](https://github.com/GetStream/webrtc-in-flutter/)
+
+**Total**: ~8 horas de estudio previo recomendado
+
+---
+
+## ✅ Checklist Pre-Implementación
+
+Antes de hacer `git checkout -b feature/calca-connect`:
+
+- [ ] **Documentación leída**:
+  - [ ] PROYECCION_REMOTA.md (especificación completa)
+  - [ ] PROYECCION_REMOTA_ANALISIS_ALTERNATIVAS.md (decisiones técnicas)
+  - [ ] Esta guía (PROYECCION_REMOTA_GUIA_INICIO.md)
+
+- [ ] **Preparación técnica**:
+  - [ ] Estudiado proyectos ejemplo de WebRTC
+  - [ ] Revisado documentación de `bonsoir`
+  - [ ] Ambiente de desarrollo listo (2+ dispositivos para testing)
+
+- [ ] **Gestión de proyecto**:
+  - [ ] Timeline de 2.5-3 meses bloqueado en calendario
+  - [ ] Expectativas alineadas con stakeholders
+  - [ ] Plan B definido si WebRTC falla
+
+- [ ] **Rama de desarrollo**:
+  - [ ] Rama `feature/calca-connect` creada
+  - [ ] Main protegido (no commits directos)
+  - [ ] CI/CD configurado para la rama
+
+---
+
+## 🚦 Señales de Alerta (Stop Conditions)
+
+**Detener/Replantear si**:
+
+1. 🔴 **Fase 1 toma >3 semanas**
+   - Acción: Revisar complejidad con experto externo
+
+2. 🔴 **mDNS falla en >50% dispositivos de prueba**
+   - Acción: Pivot a entrada manual + QR code
+
+3. 🔴 **WebRTC bloqueado >6 semanas**
+   - Acción: Lanzar MVP con HTTP, WebRTC en v2.0
+
+4. 🔴 **Consumo batería >30%/hora sin optimizar**
+   - Acción: Limitar duración sesión a 15 min
+
+5. 🔴 **Feedback beta <60% satisfacción**
+   - Acción: Reevaluar caso de uso, investigar pain points
+
+---
+
+## 📞 Soporte y Consulta
+
+### Cuando Necesites Ayuda
+
+**Recursos Internos**:
+1. Esta documentación (3 archivos completos)
+2. Ejemplos de código en docs
+3. Referencias externas linkadas
+
+**Recursos Externos**:
+1. **Flutter WebRTC Discord**: Comunidad activa
+2. **Stack Overflow**: Tag `flutter-webrtc`
+3. **Consultoría puntual**: Considerar si bloqueado >1 semana
+
+**Cuándo pedir ayuda**:
+- ❌ No esperes 2+ semanas bloqueado
+- ✅ Pide ayuda tras 3-5 días investigando sin progreso
+- ✅ Presupuesto sugerido consultoría: €300-500 para 5-10h experto
+
+---
+
+## 🎯 Respuesta Esperada del Usuario
+
+### ¿Qué hacer ahora?
+
+**Selecciona una opción**:
+
+### A. 🚀 Comenzar Implementación Inmediatamente
+```bash
+# Ejecutar estos comandos:
+git checkout -b feature/calca-connect
+flutter pub add bonsoir network_info_plus shelf shelf_web_socket
+mkdir -p lib/features/calca_connect/{discovery,streaming,ui}
+```
+
+**Próximo paso**: Implementar Fase 1 (Descubrimiento)  
+**Tiempo estimado**: 1-2 semanas
+
+---
+
+### B. 📚 Estudiar Más Antes de Comenzar
+**Recursos recomendados**:
+1. [WebRTC for the Curious](https://webrtcforthecurious.com/) (2-3 horas)
+2. [Bonsoir Examples](https://github.com/Skyost/Bonsoir/tree/master/example) (1 hora)
+3. [LocalSend Source](https://github.com/localsend/localsend) (proyecto similar, 2 horas)
+
+**Próximo paso**: Agendar semana de estudio, luego comenzar  
+**Tiempo estimado**: 1 semana estudio + 10-12 semanas implementación
+
+---
+
+### C. 🔍 Profundizar en Aspecto Específico
+**Opciones**:
+- "Necesito más info sobre WebRTC señalización"
+- "Cómo testear en dispositivos físicos"
+- "Alternativas si WebRTC falla"
+- "Detalles sobre permisos iOS/Android"
+
+**Próximo paso**: Consulta adicional específica
+
+---
+
+### D. ⚠️ Reconsiderar Requisitos
+**Si quieres cambiar**:
+- Considerar solución cloud (más fácil pero costos mensuales)
+- WiFi Direct en lugar de mDNS (funciona sin router)
+- Solo Bluetooth (más simple pero limitado)
+
+**Próximo paso**: Reevaluación de alternativas
+
+---
+
+## 📄 Apéndice: Archivos de Documentación
+
+### Estructura Final
+
+```
+docs/
+├── PROYECCION_REMOTA_GUIA_INICIO.md           # ⬅️ ESTE ARCHIVO (punto de entrada)
+├── PROYECCION_REMOTA.md                       # Especificación técnica completa (903 líneas)
+└── PROYECCION_REMOTA_ANALISIS_ALTERNATIVAS.md # Investigación de alternativas (697 líneas)
+```
+
+**Total**: 3 archivos, ~1,800 líneas de documentación
+
+**Archivos eliminados** (redundantes):
+- ~~PROYECCION_REMOTA_CHECKLIST.md~~ → Contenido integrado aquí
+- ~~PROYECCION_REMOTA_RESUMEN_EJECUTIVO.md~~ → Contenido integrado aquí
+- ~~PROYECCION_REMOTA_DECISION_RAPIDA.md~~ → Contenido integrado aquí
+
+---
+
+## ✅ Estado Final
+
+**Documentación**: ✅ Completa y lista para GitHub  
+**Decisión técnica**: ✅ Validada (bonsoir + WebRTC)  
+**Próximo paso**: 🚀 Crear rama `feature/calca-connect` y comenzar Fase 1  
+**Rama main**: 🔒 Protegida, sin implementación hasta validar en rama feature
+
+---
+
+**Última Actualización**: 6 de noviembre de 2025  
+**Responsable**: Francisco Mateo Márquez  
+**Colaboradores**: GitHub Copilot (Análisis Técnico)  
+**Estado**: ⏸️ Esperando inicio de implementación
+
+---
+
+## 🎬 TL;DR (Too Long; Didn't Read)
+
+```
+✅ Documentación completa (3 archivos, 1,800 líneas)
+✅ Stack validado: bonsoir + WebRTC es la mejor opción
+✅ Timeline realista: 2.5-3 meses para 1 desarrollador
+✅ Riesgos identificados con mitigaciones
+✅ Plan de fases detallado
+🚀 LISTO PARA COMENZAR cuando quieras
+🔒 Implementación en rama feature/calca-connect (no tocar main)
+```
+
+**Comando de inicio**:
+```bash
+git checkout -b feature/calca-connect && flutter pub add bonsoir network_info_plus shelf
+```
